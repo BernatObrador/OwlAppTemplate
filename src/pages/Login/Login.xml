@@ -1,0 +1,26 @@
+<templates xml:space="preserve">
+  <t t-name="pages.Login">
+    <main class="app-auth-page">
+      <form class="app-card app-auth-card" t-on-submit="submit">
+        <div>
+          <span class="app-eyebrow">OWL 2</span>
+          <h1 t-esc="env.appName"/>
+          <p class="app-muted">Sign in to your workspace.</p>
+        </div>
+        <div t-if="state.error" class="app-alert app-alert-danger" role="alert" t-esc="state.error"/>
+        <div class="app-field">
+          <label class="app-label" for="email">Email</label>
+          <input id="email" class="app-input" type="email" autocomplete="username" required="required" t-model="state.email"/>
+        </div>
+        <div class="app-field">
+          <label class="app-label" for="password">Password</label>
+          <input id="password" class="app-input" type="password" autocomplete="current-password" required="required" t-model="state.password"/>
+        </div>
+        <button class="app-button app-button-primary app-button-block" type="submit" t-att-disabled="state.submitting">
+          <t t-esc="state.submitting ? 'Signing in…' : 'Sign in'"/>
+        </button>
+        <small t-if="env.useMock" class="app-muted">Demo: demo@example.com / demo</small>
+      </form>
+    </main>
+  </t>
+</templates>

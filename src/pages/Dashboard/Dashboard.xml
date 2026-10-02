@@ -1,0 +1,41 @@
+<templates xml:space="preserve">
+  <t t-name="pages.Dashboard">
+    <section class="app-page">
+      <div class="app-page-header">
+        <div>
+          <h1>Dashboard</h1>
+          <p class="app-muted">A small CRM demo backed by the template's mock API.</p>
+        </div>
+      </div>
+      <p t-if="state.loading" role="status">Loading dashboard…</p>
+      <div t-elif="state.error" class="app-alert app-alert-danger" role="alert">
+        <p t-esc="state.error"/>
+        <button class="app-button app-button-ghost" t-on-click="load">Retry</button>
+      </div>
+      <div t-if="state.summary and !state.loading and !state.error" class="app-kpi-grid">
+        <article class="app-card app-kpi">
+          <span class="app-muted">Contacts</span>
+          <strong
+            t-esc="state.summary.contacts" />
+        </article>
+        <article class="app-card app-kpi">
+          <span class="app-muted">Open opportunities</span>
+          <strong
+            t-esc="state.summary.opportunities" />
+        </article>
+        <article class="app-card app-kpi">
+          <span class="app-muted">Pipeline</span>
+          <strong>
+            <t t-esc="formatCurrency(state.summary.pipeline)" />
+          </strong>
+        </article>
+      </div>
+      <article t-if="!state.loading and !state.error" class="app-card">
+        <div class="app-card-header">
+          <h2>Recent opportunities</h2>
+        </div>
+        <DataTable columns="columns" records="state.records" />
+      </article>
+    </section>
+  </t>
+</templates>

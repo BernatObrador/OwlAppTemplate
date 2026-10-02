@@ -1,0 +1,15 @@
+<templates xml:space="preserve">
+  <t t-name="components.FormField">
+    <div class="app-field" t-att-aria-busy="props.loading ? 'true' : undefined">
+      <label t-att-for="id" class="app-label"><t t-esc="props.label"/><span t-if="props.required" class="app-required"> *</span></label>
+      <select t-if="props.type === 'select'" class="app-input" t-att-id="id" t-att-name="props.name" t-att-disabled="disabled" t-att-required="props.required" t-att-aria-invalid="props.error ? 'true' : 'false'" t-att-aria-describedby="describedBy" t-on-change="input">
+        <option t-foreach="props.options || []" t-as="option" t-key="option.value" t-att-value="option.value" t-att-selected="option.value === props.value" t-att-disabled="option.disabled" t-esc="option.label"/>
+      </select>
+      <textarea t-elif="props.type === 'textarea'" class="app-input" t-att-id="id" t-att-name="props.name" t-att-value="props.value" t-att-rows="props.rows || 4" t-att-placeholder="props.placeholder" t-att-disabled="disabled" t-att-required="props.required" t-att-aria-invalid="props.error ? 'true' : 'false'" t-att-aria-describedby="describedBy" t-on-input="input"/>
+      <input t-elif="props.type === 'checkbox'" class="app-checkbox" type="checkbox" t-att-id="id" t-att-name="props.name" t-att-checked="props.value" t-att-disabled="disabled" t-att-required="props.required" t-att-aria-invalid="props.error ? 'true' : 'false'" t-att-aria-describedby="describedBy" t-on-change="input"/>
+      <input t-else="" class="app-input" t-att-id="id" t-att-name="props.name" t-att-type="props.type || 'text'" t-att-value="props.value" t-att-placeholder="props.placeholder" t-att-disabled="disabled" t-att-required="props.required" t-att-min="props.min" t-att-max="props.max" t-att-step="props.step" t-att-autocomplete="props.autocomplete" t-att-aria-invalid="props.error ? 'true' : 'false'" t-att-aria-describedby="describedBy" t-on-input="input"/>
+      <small t-if="props.help" t-att-id="id + '-help'" class="app-muted" t-esc="props.help"/>
+      <small t-if="props.error" t-att-id="id + '-error'" class="app-field-error" t-esc="props.error"/>
+    </div>
+  </t>
+</templates>

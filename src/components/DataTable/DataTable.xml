@@ -1,0 +1,34 @@
+<templates xml:space="preserve">
+  <t t-name="components.DataTable">
+    <div class="app-table-wrap" t-att-aria-busy="props.loading ? 'true' : 'false'">
+      <table class="app-table">
+        <caption class="app-sr-only" t-esc="props.caption || 'Records'"/>
+        <thead><tr>
+          <th t-if="props.selectable" scope="col"><input type="checkbox" aria-label="Select all visible rows" t-att-checked="allSelected" t-att-disabled="props.loading || !records.length" t-on-change="toggleAll"/></th>
+          <th t-foreach="props.columns" t-as="column" t-key="column.key" scope="col" t-att-aria-sort="column.sortable ? ariaSort(column) : undefined">
+            <button t-if="column.sortable" type="button" class="app-table-sort" t-att-disabled="props.loading" t-on-click="() => this.sortColumn(column)"><t t-esc="column.label"/> <span aria-hidden="true" t-esc="sortSymbol(column)"/></button>
+            <t t-else="" t-esc="column.label"/>
+          </th>
+          <th t-if="props.actions?.length" scope="col">Actions</th>
+        </tr></thead>
+        <tbody>
+          <tr t-if="props.loading"><td t-att-colspan="colspan" class="app-empty" role="status">Loading records…</td></tr>
+          <t t-elif="records.length">
+            <tr t-foreach="records" t-as="record" t-key="key(record)" t-att-class="props.onRowClick ? 'is-clickable' : ''" t-att-tabindex="props.onRowClick ? 0 : undefined" t-on-keydown="(ev) => this.rowKeydown(ev, record)" t-on-click="(ev) => this.rowClick(ev, record)">
+              <td t-if="props.selectable"><input type="checkbox" t-att-aria-label="'Select row ' + key(record)" t-att-checked="selected(record)" t-on-click.stop="() => {}" t-on-change="() => this.toggle(record)"/></td>
+              <td t-foreach="props.columns" t-as="column" t-key="column.key">
+                <t t-if="column.component" t-component="column.component" t-props="cellProps(record, column)"/>
+                <span t-elif="column.type === 'badge'" class="app-badge" t-esc="value(record, column)"/>
+                <t t-else="" t-esc="value(record, column)"/>
+              </td>
+              <td t-if="props.actions?.length" class="app-row-actions">
+                <button t-foreach="actions(record)" t-as="action" t-key="action.key" type="button" class="app-button app-button-ghost" t-att-disabled="actionDisabled(action, record)" t-on-click.stop="() => this.runAction(action, record)"><t t-esc="action.label"/></button>
+              </td>
+            </tr>
+          </t>
+          <tr t-else=""><td t-att-colspan="colspan" class="app-empty" t-esc="props.emptyMessage || 'No records found.'"/></tr>
+        </tbody>
+      </table>
+    </div>
+  </t>
+</templates>

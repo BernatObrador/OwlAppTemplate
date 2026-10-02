@@ -1,0 +1,8 @@
+<templates xml:space="preserve"
+  ><t t-name="components.LoadingBar"
+    ><div
+      t-if="state.active"
+      class="app-loading-bar"
+      role="progressbar"
+      aria-label="Loading" /></t
+></templates>

@@ -1,0 +1,27 @@
+<templates xml:space="preserve">
+  <t t-name="pages.Opportunities">
+    <section class="app-page">
+      <div class="app-page-header">
+        <div>
+          <h1>Opportunities</h1>
+          <p class="app-muted">
+            <t t-esc="state.total"/> opportunities
+          </p>
+        </div>
+        <button class="app-button app-button-primary" t-on-click="createRecord">+ New opportunity</button>
+      </div>
+      <article class="app-card">
+        <div class="app-toolbar">
+          <SearchInput value="state.query" placeholder="'Search opportunities…'" onInput.bind="search"/>
+          <FormField name="'stage-filter'" label="'Stage'" type="'select'" value="state.filters.stage" options="stageOptions" onInput="(value) => this.changeFilter('stage', value)"/>
+        </div>
+        <div t-if="state.error" role="alert" class="app-alert app-alert-danger">
+          <p t-esc="state.error"/>
+          <button class="app-button app-button-ghost" t-on-click="load">Retry</button>
+        </div>
+        <DataTable t-else="" columns="columns" records="state.records" loading="state.loading" sort="state.sort" order="state.order" onSort.bind="changeSort" onRowClick.bind="open" actions="rowActions"/>
+        <Pagination t-if="!state.loading and !state.error" page="state.page" pages="state.pages" onChange.bind="changePage"/>
+      </article>
+    </section>
+  </t>
+</templates>

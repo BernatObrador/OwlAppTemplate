@@ -1,0 +1,35 @@
+{
+  "name": "owl-app-template",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run check && vite build",
+    "preview": "vite preview",
+    "check": "tsc --project jsconfig.json --noEmit && node scripts/validate-templates.mjs && node scripts/validate-source.mjs",
+    "test": "node --test tests/*.test.js",
+    "component": "node scripts/component.mjs component",
+    "page": "node scripts/component.mjs page",
+    "resource": "node scripts/resource.mjs",
+    "createApp": "node scripts/create-app.mjs",
+    "clean": "node scripts/clean.mjs",
+    "reinstall": "npm run clean && npm ci",
+    "owl-version": "npm list @odoo/owl",
+    "owl-update": "npm install --save-exact @odoo/owl@latest",
+    "core:update": "node scripts/core-update.mjs"
+  },
+  "dependencies": {
+    "@odoo/owl": "2.8.3",
+    "bootstrap": "5.3.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.4",
+    "jsdom": "^26.1.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.0.0"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  }
+}

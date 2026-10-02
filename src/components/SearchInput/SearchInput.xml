@@ -1,0 +1,15 @@
+<templates xml:space="preserve">
+  <t t-name="components.SearchInput">
+    <div class="app-search">
+      <span aria-hidden="true">⌕</span
+      ><input
+        class="app-input"
+        type="search"
+        t-att-aria-label="props.placeholder || 'Search'"
+        t-att-value="props.value"
+        t-att-placeholder="props.placeholder || 'Search…'"
+        t-on-input="onInput"
+      />
+    </div>
+  </t>
+</templates>

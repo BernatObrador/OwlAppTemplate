@@ -1,0 +1,14 @@
+<templates xml:space="preserve">
+  <t t-name="components.BreadCrumbs">
+    <nav aria-label="Breadcrumb" class="app-breadcrumbs" t-if="props.pathList.length">
+      <ol>
+        <li t-foreach="props.pathList" t-as="path" t-key="path.url">
+          <a t-if="!path_last" t-att-href="path.url" t-on-click.prevent="() => this.onClickPath(path)">
+            <t t-esc="path.name"/>
+          </a>
+          <span t-else="" aria-current="page" t-esc="path.name"/>
+        </li>
+      </ol>
+    </nav>
+  </t>
+</templates>

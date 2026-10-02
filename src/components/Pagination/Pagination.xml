@@ -1,0 +1,26 @@
+<templates xml:space="preserve">
+  <t t-name="components.Pagination">
+    <div class="app-pagination" t-if="props.pages &gt; 1">
+      <button
+        class="app-button app-button-ghost"
+        t-att-disabled="props.page === 1"
+        t-on-click="previous"
+      >
+        Previous
+      </button>
+      <span
+        >Page
+        <strong t-esc="props.page" /> of
+        <strong t-esc="props.pages"
+      />
+      </span>
+      <button
+        class="app-button app-button-ghost"
+        t-att-disabled="props.page === props.pages"
+        t-on-click="next"
+      >
+        Next
+      </button>
+    </div>
+  </t>
+</templates>

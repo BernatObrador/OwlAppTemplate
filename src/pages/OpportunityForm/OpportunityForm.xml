@@ -1,0 +1,22 @@
+<templates xml:space="preserve">
+  <t t-name="pages.OpportunityForm">
+    <section class="app-page app-page-narrow">
+      <div class="app-page-header"><h1 t-esc="isNew ? 'New opportunity' : 'Edit opportunity'"/></div>
+      <p t-if="state.loading" role="status">Loading opportunity…</p>
+      <div t-elif="state.loadError" role="alert" class="app-alert app-alert-danger"><p t-esc="state.loadError"/><button class="app-button app-button-ghost" t-on-click="load">Retry</button></div>
+      <form t-else="" class="app-card app-form" t-on-submit="save">
+        <div t-if="state.saveError" role="alert" class="app-alert app-alert-danger" t-esc="state.saveError"/>
+        <FormField name="'name'" label="'Name'" value="state.form.name" required="true" error="state.errors.name" disabled="state.saving" onInput="(value) => this.setField('name', value)"/>
+        <FormField name="'customer'" label="'Customer'" value="state.form.customer" required="true" error="state.errors.customer" disabled="state.saving" onInput="(value) => this.setField('customer', value)"/>
+        <FormField name="'amount'" label="'Amount'" type="'number'" value="state.form.amount" min="0" step="0.01" required="true" help="'Amount in EUR.'" error="state.errors.amount" disabled="state.saving" onInput="(value) => this.setField('amount', value)"/>
+        <FormField name="'stage'" label="'Stage'" type="'select'" value="state.form.stage" options="stageOptions" error="state.errors.stage" disabled="state.saving" onInput="(value) => this.setField('stage', value)"/>
+        <small t-if="dirty" class="app-muted">Unsaved changes</small>
+        <div class="app-form-actions">
+          <button type="button" class="app-button app-button-ghost" t-att-disabled="state.saving" t-on-click="cancel">Cancel</button>
+          <button type="button" class="app-button app-button-ghost" t-att-disabled="state.saving || !dirty" t-on-click="reset">Reset</button>
+          <button type="submit" class="app-button app-button-primary" t-att-disabled="state.saving"><t t-esc="state.saving ? 'Saving…' : 'Save opportunity'"/></button>
+        </div>
+      </form>
+    </section>
+  </t>
+</templates>

@@ -1,0 +1,8 @@
+<templates xml:space="preserve">
+  <t t-name="pages.Home">
+    <section class="app-page">
+      <div class="app-page-header"><h1 t-esc="env.appName"/></div>
+      <article class="app-card"><h2>Welcome</h2><p>Your workspace is ready.</p></article>
+    </section>
+  </t>
+</templates>

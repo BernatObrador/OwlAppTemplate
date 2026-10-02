@@ -1,0 +1,9 @@
+<templates xml:space="preserve">
+  <t t-name="app.App">
+    <LoadingBar/>
+    <t t-if="currentComponent">
+      <t t-component="currentComponent" t-props="currentProps"/>
+    </t>
+    <ToastHost/>
+  </t>
+</templates>

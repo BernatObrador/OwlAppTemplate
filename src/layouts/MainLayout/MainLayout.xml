@@ -1,0 +1,34 @@
+<templates xml:space="preserve">
+  <t t-name="layouts.MainLayout">
+    <div class="app-shell">
+      <header class="app-topbar">
+        <button class="app-icon-button app-mobile-only" t-on-click="() => this.ui.sidebarOpen = !this.ui.sidebarOpen" aria-label="Toggle menu" aria-controls="app-navigation" t-att-aria-expanded="ui.sidebarOpen">☰</button>
+        <a class="app-brand" href="/" t-on-click.prevent="() => this.navigate('/')">
+          <t t-esc="env.appName"/>
+        </a>
+        <div class="app-topbar-spacer"/>
+        <div class="app-user-menu">
+          <span class="app-muted">
+            <t t-esc="user?.name"/>
+          </span>
+          <button class="app-button app-button-ghost" t-att-disabled="ui.loggingOut" t-on-click="logout">Log out</button>
+        </div>
+      </header>
+      <div class="app-body">
+        <aside t-att-class="'app-sidebar ' + (this.ui.sidebarOpen ? 'is-open' : '')">
+          <nav id="app-navigation" class="app-nav" aria-label="Main navigation">
+            <a t-foreach="env.navigation" t-as="item" t-key="item.path" t-att-href="item.path" t-att-class="'app-nav-link ' + (isActive(item) ? 'is-active' : '')" t-att-aria-current="isActive(item) ? 'page' : undefined" t-on-click.prevent="() => this.navigate(item.path)">
+              <t t-esc="item.label"/>
+            </a>
+          </nav>
+          <div class="app-sidebar-footer">OWL 2 standalone starter</div>
+        </aside>
+        <div t-if="this.ui.sidebarOpen" class="app-sidebar-backdrop app-mobile-only" t-on-click="() => this.ui.sidebarOpen = false"/>
+        <main class="app-main">
+          <BreadCrumbs pathList="breadcrumbs"/>
+          <t t-component="props.PageComponent" t-props="pageProps" t-key="props.route.key"/>
+        </main>
+      </div>
+    </div>
+  </t>
+</templates>

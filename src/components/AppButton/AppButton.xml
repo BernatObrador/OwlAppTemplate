@@ -1,0 +1,12 @@
+<templates xml:space="preserve">
+  <t t-name="components.AppButton">
+    <button
+      t-att-type="props.type || 'button'"
+      t-att-disabled="props.disabled"
+      t-att-class="'app-button app-button-' + (props.variant || 'primary')"
+      t-on-click="click"
+    >
+      <t t-esc="props.label" />
+    </button>
+  </t>
+</templates>

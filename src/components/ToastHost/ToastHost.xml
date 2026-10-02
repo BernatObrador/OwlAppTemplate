@@ -1,0 +1,24 @@
+<templates xml:space="preserve">
+  <t t-name="components.ToastHost">
+    <div class="app-toast-host" aria-live="polite">
+      <div
+        t-foreach="state.items"
+        t-as="item"
+        t-key="item.id"
+        t-att-class="'app-toast is-' + item.type"
+      >
+        <div>
+          <strong t-if="item.title" t-esc="item.title" />
+          <div t-esc="item.message" />
+        </div>
+        <button
+          class="app-toast-close"
+          t-on-click="() => this.remove(item.id)"
+          aria-label="Dismiss"
+        >
+          ×
+        </button>
+      </div>
+    </div>
+  </t>
+</templates>

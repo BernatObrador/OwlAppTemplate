@@ -1,0 +1,21 @@
+<templates xml:space="preserve">
+  <t t-name="pages.Projects">
+    <section class="app-page">
+      <div class="app-page-header">
+        <div>
+          <h1>Projects</h1>
+        </div>
+      </div>
+      <article class="app-card">
+        <p t-if="state.loading" role="status">Loading Projects...</p>
+        <div t-elif="state.error" class="app-alert app-alert-danger" role="alert">
+          <p t-esc="state.error"/>
+          <button class="app-button app-button-ghost" t-on-click="load">Retry</button>
+        </div>
+        <t t-else="">
+          <DataTable columns="columns" records="state.records"/>
+        </t>
+      </article>
+    </section>
+  </t>
+</templates>

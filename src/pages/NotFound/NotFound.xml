@@ -1,0 +1,5 @@
+<templates xml:space="preserve">
+  <t t-name="pages.NotFound">
+    <main class="app-auth-page"><div class="app-card app-auth-card"><span class="app-eyebrow">404</span><h1>Page not found</h1><p class="app-muted">The requested route does not exist.</p><button class="app-button app-button-primary" t-on-click="() => env.router.navigate('/')">Go to home</button></div></main>
+  </t>
+</templates>

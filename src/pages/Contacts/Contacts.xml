@@ -1,0 +1,30 @@
+<templates xml:space="preserve">
+  <t t-name="pages.Contacts">
+    <section class="app-page">
+      <div class="app-page-header">
+        <div>
+          <h1>Contacts</h1>
+          <p class="app-muted">
+            <t t-esc="state.total"/> contacts in this demo.
+          </p>
+        </div>
+        <button class="app-button app-button-primary" t-on-click="createRecord">+ New contact</button>
+      </div>
+      <article class="app-card">
+        <div class="app-toolbar">
+          <SearchInput value="state.query" placeholder="'Search contacts…'" onInput.bind="search"/>
+          <FormField name="'status-filter'" label="'Status'" type="'select'" value="state.filters.status" options="statusOptions" onInput="(value) => this.changeFilter('status', value)"/>
+        </div>
+        <p t-if="state.loading" role="status">Loading contacts…</p>
+        <div t-elif="state.error" class="app-alert app-alert-danger" role="alert">
+          <p t-esc="state.error"/>
+          <button class="app-button app-button-ghost" t-on-click="load">Retry</button>
+        </div>
+        <t t-else="">
+          <DataTable columns="columns" records="state.records" onRowClick.bind="open" sort="state.sort" order="state.order" onSort.bind="changeSort"/>
+          <Pagination page="state.page" pages="state.pages" onChange.bind="changePage"/>
+        </t>
+      </article>
+    </section>
+  </t>
+</templates>
